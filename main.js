@@ -1,12 +1,14 @@
 var keys = [];
 var change = false;
+var fighter1, fighter2;
 function Start()
 {
     var stage = new Stage("c");
-    var fighter1 = new mkFighter("Joe",5,5,20);
+    fighter1 = new mkFighter("Joe",5,5,20);
     fighter1.moveSet.push(new mkMove("HADOUKEN",new specialExecution().QRT_CIRCLE_F,3,3,2));
+    fighter1.moveSet.push(new mkMove("FORWARD",new execution().RIGHT,3,3,2));
     console.log(fighter1.moveSet);
-    var fighter2 = new mkFighter("John",3,7,20);
+    fighter2 = new mkFighter("John",3,7,20);
     // events
     stage.addEventListener(KeyboardEvent.KEY_DOWN, onKD);
     stage.addEventListener(KeyboardEvent.KEY_UP, onKU);
@@ -41,4 +43,9 @@ function onEF (e)
         console.log(keys);
         change = false;
     }
+    _.each(fighter1.moveSet, function(move){
+        if (keys.indexOf([].concat.apply(move.execution)) !== -1){
+            console.log(move.name);
+        }
+    });
 }
